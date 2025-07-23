@@ -23,12 +23,20 @@ fecthdta();
  },[]);
 const [namein  , setname] = useState('');
 const [agein  , setage] = useState('');
+
+
  const addage = async()=>{
   try{
-      alert('asd');
+
+
+    if (!window.confirm('Are you sure you want to delete this entry?')) {
+            return; 
+        }
+
  await axios.post(
+  
         'https://express-test-f6pa.onrender.com/api/age/add',
-        { name: namein, age: agein },
+        { name: namein, age:agein },
         {
           headers: { 'Content-Type': 'application/json' }
         }
