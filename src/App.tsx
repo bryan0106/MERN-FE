@@ -25,16 +25,12 @@ const [namein  , setname] = useState('');
 const [agein  , setage] = useState('');
 
 
- const addage = async()=>{
+ const addage = async(e:React.FormEvent)=>{
+  e.preventDefault();
   try{
-
-
-    if (!window.confirm('Are you sure you want to delete this entry?')) {
-            return; 
-        }
+    if (!window.confirm('Are you sure you want to delete this entry?')) {return; }
 
  await axios.post(
-  
         'https://express-test-f6pa.onrender.com/api/age/add',
         { name: namein, age:agein },
         {
@@ -44,11 +40,9 @@ const [agein  , setage] = useState('');
       alert('Age added successfully!'); // User feedback
 setname('');
 setage('');
-
 } catch{
   alert('asd');
 }
-
  }
 
 
@@ -94,7 +88,7 @@ const deleteage = async (id: any) => { // id: any is fine for now, or string if 
     <main>
       <section>
 
-<form onSubmit={addage}>
+<form onSubmit={addage} method='POST'>
 <input type="text" onChange={(e)=> setname(e.target.value)} />
 <input type="number" onChange={(e)=> setage(e.target.value)} />
 <button type='submit'>save</button>
